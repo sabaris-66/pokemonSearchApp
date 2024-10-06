@@ -11,12 +11,13 @@ const pokemonDefense = document.querySelector("#defense");
 const pokemonSpAtt = document.querySelector("#special-attack");
 const pokemonSpDef = document.querySelector("#special-defense");
 const pokemonSpeed = document.querySelector("#speed");
+const display3 = document.querySelector("#display3");
 
 const assignPokemonData = (pokemonData) => {
-  pokemonName.textContent = pokemonData.name;
-  pokemonId.textContent = pokemonData.id;
-  pokemonWeight.textContent = pokemonData.weight;
-  pokemonHeight.textContent = pokemonData.height;
+  pokemonName.textContent = pokemonData.name.toUpperCase();
+  pokemonId.textContent = `#${pokemonData.id}`;
+  pokemonWeight.textContent = `Weight: ${pokemonData.weight}`;
+  pokemonHeight.textContent = `Height: ${pokemonData.height}`;
   pokemonData.stats.forEach(({ base_stat, stat }) => {
     switch (stat.name) {
       case "hp":
@@ -48,9 +49,16 @@ const assignPokemonData = (pokemonData) => {
     }
   });
 
+  pokemonTypes.innerHTML = "";
   pokemonData.types.forEach((type) => {
-    pokemonTypes.textContent += `${type.type.name} `;
+    pokemonTypes.innerHTML += `<span>${type.type.name.toUpperCase()} </span>`;
   });
+
+  display3.innerHTML = "";
+  const image = document.createElement("img");
+  image.id = "sprite";
+  image.src = pokemonData.sprites.front_default;
+  display3.appendChild(image);
 };
 
 const fetchPokemonData = async (pokemon) => {
@@ -71,8 +79,13 @@ const fetchData = async (pokemonName) => {
     );
     const pokemonData = await res.json();
     pokemonData.results.forEach((pokemon) => {
-      if (pokemon.name === pokemonName) {
+      if (
+        pokemon.name === pokemonName ||
+        pokemon.id === parseInt(pokemonName)
+      ) {
         fetchPokemonData(pokemon);
+        const display = document.querySelector(".hidden");
+        display.style.display = "flex";
         pokemonFound = true;
       }
     });
@@ -86,6 +99,12 @@ const fetchData = async (pokemonName) => {
 
 searchButton.addEventListener("click", () => {
   if (searchInput.value) {
-    fetchData(searchInput.value);
+    fetchData(searchInput.value.toLowerCase());
+  }
+});
+
+searchInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    fetchData(searchInput.value.toLowerCase().split(" ").join("-"));
   }
 });

@@ -7,19 +7,45 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <input type="text" id="search-input" />
-    <button type="button" id="search-button"></button>
-    <div id="pokemon-name"></div>
-    <div id="pokemon-id"></div>
-    <div id="weight"></div>
-    <div id="height"></div>
-    <div id="types"></div>
-    <div id="hp"></div>
-    <div id="attack"></div>
-    <div id="defense"></div>
-    <div id="special-attack"></div>
-    <div id="special-defense"></div>
-    <div id="speed"></div>
+    <h1>Pokémon Search App</h1>
+    <main>
+      <div id="instruction">Search for Pokémon Name or ID:</div>
+      <div id="enter-line">
+        <input type="text" id="search-input" placeholder="Pokémon Name or ID" />
+        <button type="button" id="search-button">Search</button>
+      </div>
+      <div id="display" class="hidden">
+        <div id="display1">
+          <div id="pokemon-name"></div>
+          <div id="pokemon-id"></div>
+        </div>
+        <div id="display2">
+          <div id="weight">Weight:</div>
+          <div id="height">Height:</div>
+        </div>
+        <div id="display3"></div>
+        <div id="display4">
+          <div id="types">Types:</div>
+        </div>
+      </div>
+      <div id="stats-container">
+        <div id="base-info" class="left-info">Base</div>
+        <div id="stats-info">Stats</div>
+        <div id="hp-info" class="left-info">HP:</div>
+        <div id="hp"></div>
+        <div id="attack-info" class="left-info">Attack:</div>
+        <div id="attack"></div>
+        <div id="defense-info" class="left-info">Defense:</div>
+        <div id="defense"></div>
+        <div id="sp-att-info" class="left-info">Sp. Attack:</div>
+        <div id="special-attack"></div>
+        <div id="sp-def-info" class="left-info">Sp. Defense:</div>
+        <div id="special-defense"></div>
+        <div id="speed-info" class="left-info">Speed:</div>
+        <div id="speed"></div>
+      </div>
+    </main>
+
     <script src="./script.js"></script>
   </body>
 </html>
